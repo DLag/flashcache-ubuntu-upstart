@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# $2 is the /dev/mapper/IDENTIFIER
+# $3 is the name of the cache, as specified by Flashcache
+
+# Tune parameters
+sysctl -w "dev.flashcache.$3.fallow_delay=3600"
+sysctl -w "dev.flashcache.$3.dirty_thresh_pct=80"
+sysctl -w "dev.flashcache.$3.reclaim_policy=1"
+sysctl -w "dev.flashcache.$3.fast_remove=1"
+
+# Verify disk structure
+/sbin/fsck -y -f "/dev/mapper/$2"
+
+# Mount it
+/bin/mount -t ext4 -o rw,nodiratime,noatime "/dev/mapper/$2" "$4"
+
+# Done
+exit 0

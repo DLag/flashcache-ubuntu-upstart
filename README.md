@@ -5,7 +5,7 @@ flashcache-ubuntu-upstart
 
 Edit /etc/flashcache/caches
 
-	ssd	cachedev	sysctl_dev_name	mount_point
+	ssd  cachedev  sysctl_dev_name  mount_point
 
 Rename /etc/flashcache/cachedev.start with name of cache device
 
